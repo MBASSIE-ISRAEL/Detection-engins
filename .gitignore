@@ -1,0 +1,27 @@
+__pycache__/
+*.py[cod]
+.egg-info/
+.venv/
+venv/
+.env
+.vscode/
+*.code-workspace
+**/.cache/
+**/.cache/kagglehub/
+datasets/
+data/
+**/Cars Detection/**
+detection _engins/runs/
+detection_engins/runs/
+detection_engins/outputs/
+*.mp4
+.avi
+.mov
+.mkv
+.pt
+.onnx
+tflite
+.engine
+.bin
+.DS_Store
+Thumbs.db
