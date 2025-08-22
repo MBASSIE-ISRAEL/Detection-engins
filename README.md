@@ -3,9 +3,11 @@ Détection des engins— YOLOv8
 
 Projet de détection d’objets pour Ambulance, Bus, Car, Motorcycle, Truck à partir du dataset Kaggle abdallahwagih/cars-detection.
 Entraînement avec Ultralytics YOLOv8, prédiction sur images et vidéos avec pourcentage de confiance, résumé par classe et export CSV.
----
+
+
 
 Fonctionnalités
+---
 
 Entraînement finetune YOLOv8 sur 5 classes.
 
@@ -18,9 +20,11 @@ Panneau récap par classe (compte + confiance moyenne).
 Export detections.csv pour la vidéo.
 
 Sorties rangées dans outputs/images/ et outputs/videos/.
----
+
+
 
 Arborescence
+---
 
 Projet_DS_vs_code/
 ├─ detection_engins/
@@ -35,9 +39,9 @@ Projet_DS_vs_code/
 │     ├─ images/                    # images annotées
 │     └─ videos/                    # vidéos annotées + CSV
 └─ ...
----
 
 Prérequis
+---
 
 Windows + VS Code (extension Python)
 
@@ -46,9 +50,10 @@ Python 3.10+ (testé en 3.13)
 (Optionnel) CUDA si GPU NVIDIA
 
 (Optionnel) ffmpeg / VLC pour la lecture/convertibilité des vidéos
----
+
 
 Installation rapide
+---
 
 Ouvrir un terminal PowerShell à la racine du projet :
 
@@ -69,9 +74,12 @@ pip install torch torchvision torchaudio --index-url https://download.pytorch.or
 
 
 Dans VS Code : Ctrl+Shift+P → Python: Select Interpreter → choisissez ...\detection_engins\.venv\Scripts\python.exe.
----
+
+
 
 Télécharger & préparer le dataset
+---
+
 cd detection_engins
 python .\charger_dataset_kaggle.py
 python .\chemin_data_yaml.py   # génère data_cars_local.yaml avec chemins ABSOLUS
@@ -87,9 +95,11 @@ names: ['Ambulance','Bus','Car','Motorcycle','Truck']
 
 
 NB : Sous Windows, éviter path: relatif avec espaces (“Cars Detection”) → utiliser des chemins absolus comme ci-dessus.
----
+
 
 Entraînement
+---
+
 Script (recommandé)
 python .\train.py
 
@@ -103,9 +113,11 @@ Poids : runs/cars_all2/weights/best.pt
 yolo val model="runs/cars_all2/weights/best.pt" data="data_cars_local.yaml" plots=True
 
 Résultats observés (réf. CPU, 100 epochs, yolov8n.pt) : mAP50≈0.62 global (Ambulance0.90, Bus0.67, Car0.45, Motorcycle0.64, Truck~0.42).
----
+
 
 Prédictions — Images
+---
+
 Dossier de sortie
 New-Item -ItemType Directory -Force .\outputs\images | Out-Null
 
@@ -133,9 +145,10 @@ python .\detect_video_stats.py
 
 VS Code n’aperçoit pas toujours les MP4. Ouvrir avec Windows :
 start "" ".\outputs\videos\video_annot_percent.mp4"
----
+
 
 Paramètres utiles (inférence)
+---
 
 conf : seuil de confiance (baisser à 0.10–0.15 pour petits objets).
 
@@ -146,9 +159,10 @@ imgsz : 960–1280 pour mieux capter les véhicules lointains (plus lent).
 classes : filtrer ex. classes=1,4 (Bus & Truck).
 
 vid_stride : sous-échantillonnage vidéo.
----
+
 
 Améliorer la précision
+---
 
 Réentraîner avec yolov8s.pt + imgsz=768/960.
 
@@ -157,9 +171,10 @@ Rééquilibrer le dataset (plus de Bus/Truck en trafic dense & lointain).
 Vérifier les labels (boîtes serrées, pas d’oubli).
 
 Inspecter confusion matrix (yolo val ... plots=True).
----
+
 
 Dépannage
+---
 
 Activate.ps1 bloqué →
 Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass puis & .\.venv\Scripts\Activate.ps1
@@ -176,16 +191,18 @@ utiliser data_cars_local.yaml avec chemins absolus (pas de path: relatif).
 Vidéo illisible →
 ouvrir avec le lecteur système, ou convertir :
 ffmpeg -y -i video_annot_percent.avi -c:v libx264 -pix_fmt yuv420p video_annot_percent_h264.mp4
----
+
 
 Licence & crédits
+---
 
 Dataset : Kaggle abdallahwagih/cars-detection.
 
 Code : basé sur Ultralytics YOLOv8.
----
+
 
 Checklist “ça marche”
+---
 
 - venv activé ((.venv) visible dans le terminal)
 
