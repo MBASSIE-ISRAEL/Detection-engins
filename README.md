@@ -1,4 +1,5 @@
-Détection — YOLOv8 (VS Code • Windows)
+Détection des engins— YOLOv8 
+---
 
 Projet de détection d’objets pour Ambulance, Bus, Car, Motorcycle, Truck à partir du dataset Kaggle abdallahwagih/cars-detection.
 Entraînement avec Ultralytics YOLOv8, prédiction sur images et vidéos avec pourcentage de confiance, résumé par classe et export CSV.
@@ -20,6 +21,7 @@ Sorties rangées dans outputs/images/ et outputs/videos/.
 ---
 
 Arborescence
+
 Projet_DS_vs_code/
 ├─ detection_engins/
 │  ├─ train.py                      # entraînement
@@ -50,20 +52,20 @@ Installation rapide
 
 Ouvrir un terminal PowerShell à la racine du projet :
 
-# 1) Créer & activer le venv
+1) Créer & activer le venv
 python -m venv detection_engins\.venv
 Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 & .\detection_engins\.venv\Scripts\Activate.ps1
 
-# 2) Dépendances
+2) Dépendances
 python -m pip install --upgrade pip setuptools wheel
 pip install ultralytics opencv-python pyyaml tqdm matplotlib kagglehub
 
-# 3) PyTorch (choose one)
-# CPU :
+3) PyTorch (choose one)
+CPU :
 pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
-# GPU (CUDA 12.1) :
-# pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+GPU (CUDA 12.1) :
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
 
 
 Dans VS Code : Ctrl+Shift+P → Python: Select Interpreter → choisissez ...\detection_engins\.venv\Scripts\python.exe.
@@ -116,7 +118,7 @@ yolo predict `
 
 Script avec % + résumé
 python .\predict_image_stat_v2.py
-# écrit outputs/images/<nom>_annot_pct.jpg
+écrit outputs/images/<nom>_annot_pct.jpg
 
 Prédictions — Vidéos / Webcam
 Dossier de sortie
@@ -124,9 +126,9 @@ New-Item -ItemType Directory -Force .\outputs\videos | Out-Null
 
 Script avec % + panneau + CSV (codec fallback)
 python .\detect_video_stats.py
-# écrit:
-#  - outputs/videos/video_annot_percent.(mp4|avi)
-#  - outputs/videos/detections.csv
+écrit:
+- outputs/videos/video_annot_percent.(mp4|avi)
+- outputs/videos/detections.csv
 
 
 VS Code n’aperçoit pas toujours les MP4. Ouvrir avec Windows :
