@@ -25,3 +25,7 @@ tflite
 .bin
 .DS_Store
 Thumbs.db
+outputs/
+runs/
+*.pt
+*.gif
